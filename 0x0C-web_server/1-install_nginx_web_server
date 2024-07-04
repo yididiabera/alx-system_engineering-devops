@@ -25,4 +25,4 @@ echo -e "Hello World!" | dd status=none of=/var/www/html/index.nginx-debian.html
 
 # restarting nginx
 sudo service nginx restart
-
+echo -e "\nCompleted. \n"
