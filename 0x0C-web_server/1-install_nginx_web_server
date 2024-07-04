@@ -1,14 +1,28 @@
 #!/usr/bin/env bash
 # This script installs nginx web server on the server
 
-# Install nginx
-apt-get update -y -qq
-apt-get install nginx -y
-service nginx start
-ufu allow 'Nginx HTTP'
-chown -R "$USER":"$USER" /var/www/html
-chmod -R 755 /var/www
-# Configure nginx to listen on port 80
-sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
-# Change the content of the default page
-echo -e "Hello World!" | dd status=none of=/var/www/html/index.html
+echo -e "Updating and installing Nginx.\n"
+sudo apt-get update -y -qq && \
+	 sudo apt-get install nginx -y
+
+echo -e "\nSetting up some minor stuff.\n"
+
+# Starting nginx service
+sudo service nginx start
+
+# Allowing nginx on firewall
+sudo ufw allow 'Nginx HTTP'
+
+# granting the user ownership to website files for easy editing
+sudo chown -R "$USER":"$USER" /var/www/html
+sudo chmod -R 755 /var/www
+
+# backing up default index
+cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
+
+# creating new index
+echo -e "Hello World!" | dd status=none of=/var/www/html/index.nginx-debian.html
+
+# restarting nginx
+sudo service nginx restart
+
