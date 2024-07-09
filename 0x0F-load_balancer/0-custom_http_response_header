@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# This script configures nginx so that its http response
-# contains the header "X-Served-By" with the value of
-# the hostname of the server that served the request.
-# This is useful for debugging purposes.
+# This script task is to configures nginx so that its http response
+# contains the header "X-Served-By" with the value
+# of the servers hostname that served the request.
+# Important for debugging purposes.
 
 # Install nginx
 sudo apt-get update

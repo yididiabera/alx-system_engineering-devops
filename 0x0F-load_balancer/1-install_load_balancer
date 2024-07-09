@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# This script installs and configures HAproxy on the server
-# It configures HAproxy so that it send traffic to the
-# two web servers in a round robin fashion and it should be
-# managed via an init script
+# Installing and congiguring the HAproxy on the server
+# It configures HAproxy so that it send traffic to the two
+# web servers in a round robin fashion and it should be
+# managing via an init script
 
-# Install HAproxy
+# Installing HAproxy
 apt update -y
 apt install haproxy -y
 
-# Configure HAproxy to send traffic to the two web servers
+# Configuring HAproxy to send traffic to the two web servers
 cat <<EOF > /etc/haproxy/haproxy.cfg
 global
 	log /dev/log    local0
@@ -47,8 +47,8 @@ backend http_back
 	server web2 100.25.110.231:80 check
 EOF
 
-# Make sure Haproxy can be managed via an init script
+# Making sure Haproxy can be managed via an init script
 sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/haproxy
 
-# Restart HAproxy
+# Restarting HAproxy
 service haproxy restart
