@@ -1,5 +1,5 @@
-# Setup New Ubuntu server with nginx
-# and add a custom HTTP header
+# Setting up the new Ubuntu server with nginx
+# and adding  a custom made HTTP header
 
 exec { 'update system':
         command => '/usr/bin/apt-get update',
