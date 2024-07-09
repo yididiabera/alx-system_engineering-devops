@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# This script configures nginx so that its http response
+# contains the header "X-Served-By" with the value of
+# the hostname of the server that served the request.
+# This is useful for debugging purposes.
+
+# Install nginx
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Create a new configuration file
+custom_header="add_header X-Served-By \$hostname;"
+nginx_conf="/etc/nginx/sites-available/default"
+sudo sed -i "/server_name _;/a $custom_header" $nginx_conf
+
+# Restart nginx
+sudo service nginx restart
+
+# Done
