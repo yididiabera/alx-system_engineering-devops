@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# This script gets Nginx running and to start listening on
+# port 80 of all available IP addresses
+
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx restart
