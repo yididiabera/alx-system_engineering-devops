@@ -33,19 +33,19 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
-frontend bisratsync-frontend
+frontend sync-frontend
         bind *:80
         mode http
         http-request redirect scheme https code 301 unless { ssl_fc }
         http-request set-header X_Forwarded-Proto http
-        default_backend bisratsync-backend
+        default_backend sync-backend
 
-frontend bisratsync-frontend-https
-        bind *:443 ssl crt /etc/haproxy/certs/bisratsync.tech.pem
+frontend sync-frontend-https
+        bind *:443 ssl crt /etc/haproxy/certs/sync.tech.pem
         http-request set-header X-Forwarded-Proto https
-        default_backend bisratsync-backend
+        default_backend sync-backend
 
-backend bisratsync-backend
+backend sync-backend
         balance roundrobin
-        server 208187-web-01 35.175.130.255:80 check
-        server 208187-web-02 52.207.208.2:80 check
+        server 516805-web-01 54.197.80.89:80 check
+        server 516805-web-02 100.25.110.231:80 check
