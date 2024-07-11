@@ -33,19 +33,19 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
-frontend sync-frontend
+frontend yididiabera-frontend
         bind *:80
         mode http
         http-request redirect scheme https code 301 unless { ssl_fc }
         http-request set-header X_Forwarded-Proto http
         default_backend sync-backend
 
-frontend sync-frontend-https
-        bind *:443 ssl crt /etc/haproxy/certs/sync.tech.pem
+frontend yididiabera-frontend-https
+        bind *:443 ssl crt /etc/haproxy/certs/www.yididiabera.tech.pem
         http-request set-header X-Forwarded-Proto https
         default_backend sync-backend
 
-backend sync-backend
+backend yididiabera-backend
         balance roundrobin
         server 516805-web-01 54.197.80.89:80 check
         server 516805-web-02 100.25.110.231:80 check
